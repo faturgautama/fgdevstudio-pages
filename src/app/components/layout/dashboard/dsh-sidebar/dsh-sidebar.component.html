@@ -1,0 +1,12 @@
+<div class="grid w-full gap-2 pt-4">
+    @for (item of SidebarMenu; track $index) {
+    <div class="flex items-center px-5 py-2 gap-2 cursor-pointer hover:bg-sky-400 w-full"
+        (click)="handleNavigateMenu(item.path)">
+        <i [class]="item.icon" style="font-size: 13px"></i>
+
+        <p class="text-gray-700 font-medium text-sm">
+            {{ item.title }}
+        </p>
+    </div>
+    }
+</div>

@@ -1,0 +1,87 @@
+<app-dsh-base>
+    <div class="grid w-full p-3">
+        <!-- Heading -->
+        <div class="flex w-full justify-between items-center mb-10">
+            <p class="text-2xl font-medium text-gray-700">
+                Manajemen User
+            </p>
+
+            <p-button severity="info" styleClass="p-button-sm" label="Tambah User"
+                (onClick)="ShowDialogForm = true"></p-button>
+        </div>
+
+        <!-- Table -->
+        <div class="grid w-full p-3 bg-white">
+            <p-table [value]="User" [tableStyle]="{ 'min-width': '50rem' }"
+                styleClass="p-datatable-sm p-datatable-striped">
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th class="text-sm">No</th>
+                        <th class="text-sm">Nama Lengkap</th>
+                        <th class="text-sm">Email</th>
+                        <th class="text-sm">No. Telepon</th>
+                        <th class="text-sm">Status</th>
+                        <th class="text-sm"></th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-user>
+                    <tr>
+                        <td class="text-sm">{{ 1 }}</td>
+                        <td class="text-sm">{{ user.nama }}</td>
+                        <td class="text-sm">{{ user.email }}</td>
+                        <td class="text-sm">{{ user.no_telepon }}</td>
+                        <td class="text-sm">
+                            @if (user.status) {
+                            <p-tag severity="success" value="Aktif" />
+                            } @else {
+                            <p-tag severity="danger" value="Tidak Aktif" />
+                            }
+                        </td>
+                        <td class="text-sm">
+                            <div class="flex gap-3">
+                                <i class="pi pi-eye text-emerald-500" style="font-size: 12px"
+                                    (click)="handleEditUser(user)">
+                                </i>
+
+                                <i class="pi pi-pencil text-yellow-500" style="font-size: 12px"
+                                    (click)="handleEditUser(user)">
+                                </i>
+                            </div>
+                        </td>
+                    </tr>
+                </ng-template>
+            </p-table>
+        </div>
+
+        <!-- Dialog -->
+        <p-dialog [header]="FormState == 'create' ? 'Tambah User' : 'Ubah User'" [modal]="true"
+            [(visible)]="ShowDialogForm" [style]="{ width: '25rem' }" [draggable]="false" [maximizable]="false">
+            <div class="grid w-full gap-3" [formGroup]="FormUser">
+                <!-- Nama Lengkap -->
+                <div class="flex flex-col gap-1">
+                    <label for="nama" class="text-sm text-gray-700 font-medium">Nama</label>
+                    <input pInputText id="nama" class="p-inputtext-sm w-full" formControlName="nama" />
+                </div>
+
+                <!-- No. Telepon -->
+                <div class="flex flex-col gap-1">
+                    <label for="no_telepon" class="text-sm text-gray-700 font-medium">No. Telepon</label>
+                    <input pInputText id="no_telepon" class="p-inputtext-sm w-full" formControlName="no_telepon" />
+                </div>
+
+                <!-- Email -->
+                <div class="flex flex-col gap-1">
+                    <label for="email" class="text-sm text-gray-700 font-medium">Email</label>
+                    <input pInputText id="email" class="p-inputtext-sm w-full" formControlName="email" />
+                </div>
+
+                <div class="grid w-full mt-3">
+                    <p-button severity="info" styleClass="p-button-sm w-full" label="Simpan"
+                        (onClick)="ShowDialogForm = false">
+                    </p-button>
+                </div>
+            </div>
+
+        </p-dialog>
+    </div>
+</app-dsh-base>

@@ -1,0 +1,15 @@
+<div class="grid w-full relative">
+    <app-dsh-navbar></app-dsh-navbar>
+
+    <div class="flex h-screen w-full pt-[4rem]">
+        <!-- Sidebar -->
+        <div class="grid w-[20rem]">
+            <app-dsh-sidebar></app-dsh-sidebar>
+        </div>
+
+        <!-- Content -->
+        <div class="flex w-full bg-gray-50 p-4 items-start">
+            <ng-content></ng-content>
+        </div>
+    </div>
+</div>

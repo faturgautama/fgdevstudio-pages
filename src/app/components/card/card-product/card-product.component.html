@@ -1,0 +1,15 @@
+<div class="flex flex-col w-full items-center bg-gray-50 rounded-lg shadow p-5 cursor-pointer"
+    (click)="handleClick(props)">
+    <!-- Gambar Produk -->
+    <img [src]="props.gambar_produk" alt="gambar_produk" class="w-full h-auto object-cover object-center mb-3">
+
+    <!-- Nama Produk -->
+    <p class="text-base text-gray-800 font-medium mb-2">
+        {{ props.nama }}
+    </p>
+
+    <!-- Harga Produk -->
+    <p class="text-sm text-sky-500">
+        {{ props.harga | currency: 'IDR ' }}
+    </p>
+</div>

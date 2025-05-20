@@ -1,0 +1,93 @@
+<app-dsh-base>
+    <div class="grid w-full p-3">
+        <!-- Heading -->
+        <div class="flex w-full justify-between items-center mb-10">
+            <p class="text-2xl font-medium text-gray-700">
+                Manajemen Produk
+            </p>
+
+            <p-button severity="info" styleClass="p-button-sm" label="Tambah Produk"
+                (onClick)="ShowDialogForm = true"></p-button>
+        </div>
+
+        <!-- Table -->
+        <div class="grid w-full p-3 bg-white">
+            <p-table [value]="Product" [tableStyle]="{ 'min-width': '50rem' }"
+                styleClass="p-datatable-sm p-datatable-striped">
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th class="text-sm">No</th>
+                        <th class="text-sm">Nama</th>
+                        <th class="text-sm">Harga</th>
+                        <th class="text-sm">Status</th>
+                        <th class="text-sm"></th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-product>
+                    <tr>
+                        <td class="text-sm">{{ 1 }}</td>
+                        <td class="text-sm">{{ product.nama }}</td>
+                        <td class="text-sm">{{ product.harga | currency: 'IDR ' }}</td>
+                        <td class="text-sm">
+                            @if (product.status) {
+                            <p-tag severity="success" value="Aktif" />
+                            } @else {
+                            <p-tag severity="danger" value="Tidak Aktif" />
+                            }
+                        </td>
+                        <td class="text-sm">
+                            <div class="flex gap-3">
+                                <i class="pi pi-eye text-emerald-500" style="font-size: 12px"
+                                    (click)="handleEditProduct(product)">
+                                </i>
+
+                                <i class="pi pi-pencil text-yellow-500" style="font-size: 12px"
+                                    (click)="handleEditProduct(product)">
+                                </i>
+                            </div>
+                        </td>
+                    </tr>
+                </ng-template>
+            </p-table>
+        </div>
+
+        <!-- Dialog -->
+        <p-dialog [header]="FormState == 'create' ? 'Tambah Produk' : 'Ubah Produk'" [modal]="true"
+            [(visible)]="ShowDialogForm" [style]="{ width: '25rem' }" [draggable]="false" [maximizable]="false">
+            <div class="grid w-full gap-3" [formGroup]="FormProduct">
+                <!-- Nama Lengkap -->
+                <div class="flex flex-col gap-1">
+                    <label for="gambar_produk" class="text-sm text-gray-700 font-medium">Gambar Produk</label>
+
+                    <div class="flex flex-col w-full items-center justify-center p-5 border-dashed border-gray-200 border"
+                        (click)="FileInputEl.click()">
+                        <img src="../../../../assets/image/image_upload.png" alt="upload here" class="h-10 w-10">
+                        <p class="Pilih Gambar Dengan Rasio 9:16"></p>
+                    </div>
+
+                    <input #FileInputEl hidden type="file" accept="image/*" />
+
+                </div>
+
+                <!-- Nama Lengkap -->
+                <div class="flex flex-col gap-1">
+                    <label for="nama" class="text-sm text-gray-700 font-medium">Nama Produk</label>
+                    <input pInputText id="nama" class="p-inputtext-sm w-full" formControlName="nama" />
+                </div>
+
+                <!-- No. Telepon -->
+                <div class="flex flex-col gap-1">
+                    <label for="no_telepon" class="text-sm text-gray-700 font-medium">Harga</label>
+                    <p-inputNumber class="p-inputtext-sm w-full" formControlName="harga"></p-inputNumber>
+                </div>
+
+                <div class="grid w-full mt-3">
+                    <p-button severity="info" styleClass="p-button-sm w-full" label="Simpan"
+                        (onClick)="ShowDialogForm = false">
+                    </p-button>
+                </div>
+            </div>
+
+        </p-dialog>
+    </div>
+</app-dsh-base>
